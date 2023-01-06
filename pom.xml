@@ -5,10 +5,40 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.javatechie</groupId>
-    <artifactId>docker-jenkins-integration-sample</artifactId>
+    <artifactId>bootjar</artifactId>
     <version>1.0-SNAPSHOT</version>
 <build>
-    <finalName>docker-jenkins-integration-sample</finalName>
+    <finalName>bootjar</finalName>
+        <plugins>
+<plugin>
+<groupId>com.spotify</groupId>
+<artifactId>dockerfile-maven-plugin</artifactId>
+<version>1.4.10</version>
+<configuration>
+<username>ravindranwg</username>
+<password>Ravindra#123456</password>
+<repository>ravindranwg/${project.build.finalName}.jar</repository>
+<tag>latest</tag>
+<buildArgs>
+<JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+</buildArgs>
+</configuration>
+<executions>
+<execution>
+<phase>install</phase>
+<id>tag-version</id>
+<goals>
+<goal>build</goal>
+<goal>push</goal>
+</goals>
+</execution>
+</executions>
+</plugin>
+<plugin>
+<groupId>org.springframework.boot</groupId>
+<artifactId>spring-boot-maven-plugin</artifactId>
+</plugin>
+</plugins>
 </build>
 
 </project>
